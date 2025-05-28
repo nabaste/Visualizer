@@ -1,3 +1,10 @@
+/// <summary>
+/// AppManager is the main coordinator of the application lifecycle.
+/// It manages loading mesh data from disk, instantiating and assigning the mesh,
+/// handling viewport layout, switching shading modes, and dispatching interaction logic.
+/// </summary>
+
+
 #if UNITY_STANDALONE_WIN
 #endif
 
@@ -30,6 +37,10 @@ namespace Visualizer.Core
             viewportManager.ResetAllViews();
         }
 
+        /// <summary>
+        /// Opens a file dialog and loads mesh data from a JSON file.
+        /// The dialog implementation depends on platform (Editor or Windows).
+        /// </summary>
         public void LoadMeshFromFile()
         {
 #if UNITY_EDITOR
@@ -60,6 +71,10 @@ namespace Visualizer.Core
             GenerateMesh(meshData);
         }
 
+        /// <summary>
+        /// Instantiates a new GameObject containing the loaded mesh, its renderer,
+        /// a collider, and interaction components. Previous mesh (if any) is destroyed.
+        /// </summary>
         private void GenerateMesh(MeshData data)
         {
             if (_currentMeshGo != null)
@@ -80,6 +95,10 @@ namespace Visualizer.Core
             Debug.Log("Mesh generated and assigned.");
         }
 
+        /// <summary>
+        /// Updates the active shading mode. Notifies listeners and updates the mesh material.
+        /// Also enables interaction features if FaceSelection mode is chosen.
+        /// </summary>
         public void SetShadingMode(ShadingMode mode)
         {
             OnShadingModeChanged?.Invoke(mode);
@@ -107,6 +126,10 @@ namespace Visualizer.Core
 #endif
         }
 
+        /// <summary>
+        /// Resets the app to its initial state after confirmation.
+        /// Clears the current mesh and resets viewport and shading mode.
+        /// </summary>
         public void ResetApp()
         {
 #if UNITY_STANDALONE_WIN

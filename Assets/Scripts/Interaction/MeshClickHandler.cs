@@ -1,3 +1,9 @@
+/// <summary>
+/// Handles user interaction with the mesh via raycasting.
+/// Detects clicks on mesh faces and notifies the FaceHighlighter component to toggle selection.
+/// Requires a MeshCollider on the same GameObject.
+/// </summary>
+
 using Visualizer.Core;
 using UnityEngine;
 
@@ -21,6 +27,7 @@ namespace Visualizer.Interaction
         {
             _mainCam = UnityEngine.Camera.main;
 
+            // Fallback in case faceHighlighter is not manually assigned
             if (!faceHighlighter)
                 faceHighlighter = GetComponent<FaceHighlighter>();
         }

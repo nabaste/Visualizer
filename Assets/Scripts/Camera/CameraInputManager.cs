@@ -1,3 +1,9 @@
+/// <summary>
+/// Manages which camera view is currently focused based on user clicks.
+/// Determines input routing and updates UI labels to reflect focus.
+/// Prevents focus changes when a view is maximized (handled by ViewportManager).
+/// </summary>
+
 using UnityEngine;
 using UnityEngine.UI;
 using Visualizer.Core;
@@ -40,8 +46,11 @@ namespace Visualizer.Camera
                 SetFocusedCamera(clickedView);
             }
         }
-
-        CameraView GetClickedView(float x, float y)
+        
+        /// <summary>
+        /// Determines which camera view was clicked based on screen coordinates.
+        /// </summary>
+        private CameraView GetClickedView(float x, float y)
         {
             if (y is > 0.45f )
             {
@@ -55,6 +64,9 @@ namespace Visualizer.Camera
             }
         }
 
+        /// <summary>
+        /// Changes focus to the specified camera and updates the UI.
+        /// </summary>
         private void SetFocusedCamera(CameraView view)
         {
             if (focusedView == view) return;
@@ -63,6 +75,9 @@ namespace Visualizer.Camera
             UpdateLabelColors();
         }
 
+        /// <summary>
+        /// Updates the UI label colors to reflect the currently focused camera.
+        /// </summary>
         private void UpdateLabelColors()
         {
             topLabel.color = (focusedView == CameraView.Top) ? focusedColor : unfocusedColor;

@@ -1,3 +1,9 @@
+/// <summary>
+/// ViewportManager handles the layout and visibility of the 4 main view cameras (Top, Front, Right, Perspective).
+/// It manages toggling between multi-view and maximized view modes, controls camera viewports,
+/// and shows/hides overlay UI panels accordingly.
+/// </summary>
+
 using UnityEngine;
 
 namespace Visualizer.Core
@@ -11,7 +17,11 @@ namespace Visualizer.Core
 
         public bool IsMaximized => _currentMaximizedCamera;
 
-
+        /// <summary>
+        /// Maximizes or restores a given view by name.
+        /// If the view is already maximized, it resets to the 4-view layout.
+        /// Also toggles UI overlay visibility.
+        /// </summary>
         public void Maximize(string view)
         {
             UnityEngine.Camera targetCam = GetCameraByName(view);
@@ -42,6 +52,9 @@ namespace Visualizer.Core
             }
         }
 
+        /// <summary>
+        /// Disables all cameras except the one passed in, and gives it full screen real estate.
+        /// </summary>
         private void SetMaximizedView(UnityEngine.Camera cam)
         {
             ResetCameraRects();
@@ -67,6 +80,9 @@ namespace Visualizer.Core
             };
         }
 
+        /// <summary>
+        /// Restores all 4 cameras to their default 2x2 layout and enables them all.
+        /// </summary>
         public void ResetAllViews()
         {
             topCam.enabled = frontCam.enabled = rightCam.enabled = perspectiveCam.enabled = true;
@@ -77,6 +93,9 @@ namespace Visualizer.Core
             rightCam.rect = new Rect(0.5f, 0f, 0.5f, 0.45f);
         }
 
+        /// <summary>
+        /// Clears all camera rects (sets them to 0), used before setting a maximized layout.
+        /// </summary>
         private void ResetCameraRects()
         {
             foreach (var cam in new[] { topCam, frontCam, rightCam, perspectiveCam })

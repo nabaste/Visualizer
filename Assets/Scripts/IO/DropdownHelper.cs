@@ -1,3 +1,9 @@
+/// <summary>
+/// Handles UI interactions between a TMP_Dropdown and the shading mode logic in the AppManager.
+/// Automatically populates the dropdown with enum values, synchronizes external changes, 
+/// and communicates user selection back to the application.
+/// </summary>
+
 using System;
 using Visualizer.Core;
 using TMPro;
@@ -11,7 +17,7 @@ namespace Visualizer.IO
     {
         private TMP_Dropdown _dropdown;
         private AppManager _appManager;
-        private bool _isUpdatingProgrammatically = false;
+        private bool _isUpdatingProgrammatically = false;  // Prevent feedback loop on UI update
 
 
         private void Awake()
@@ -45,6 +51,9 @@ namespace Visualizer.IO
             }
         }
 
+        /// <summary>
+        /// Fills the dropdown with names from the ShadingMode enum.
+        /// </summary>
         private void PopulateDropdownFromEnum()
         {
             _dropdown.ClearOptions();
@@ -52,6 +61,9 @@ namespace Visualizer.IO
             _dropdown.AddOptions(options);
         }
 
+        /// <summary>
+        /// Called via Unity UI system when the dropdown value changes.
+        /// </summary>
         public void OnDropdownValueChanged()
         {
 
@@ -72,6 +84,9 @@ namespace Visualizer.IO
             }
         }
 
+        /// <summary>
+        /// Updates the dropdown to reflect an externally triggered shading mode change.
+        /// </summary>
         private void HandleExternalShadingModeChange(ShadingMode mode)
         {
             _isUpdatingProgrammatically = true;

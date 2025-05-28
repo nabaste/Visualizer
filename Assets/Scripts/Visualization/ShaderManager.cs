@@ -1,3 +1,7 @@
+/// <summary>
+/// Manages material assignment based on shading modes for mesh visualization.
+/// </summary>
+
 using System;
 using UnityEngine;
 
@@ -12,10 +16,12 @@ namespace Visualizer.Visualization
             slopeHeatmapMaterial,
             faceSelectionMaterial;
 
-        private GameObject _activeVisualizer;
-
         private ShadingMode _currentMode;
 
+        /// <summary>
+        /// Applies a specific shading mode to the given MeshRenderer.
+        /// Optionally invoked without a renderer to only store mode state.
+        /// </summary>
         public void ApplyShading(MeshRenderer meshRenderer = null, ShadingMode mode = ShadingMode.Shaded)
         {
             _currentMode = mode;
@@ -50,6 +56,10 @@ namespace Visualizer.Visualization
             }
         }
 
+        /// <summary>
+        /// Returns the material associated with the currently selected shading mode.
+        /// Useful for applying mode-consistent materials when spawning new meshes.
+        /// </summary>
         public Material GetCurrentMaterial()
         {
             return _currentMode switch

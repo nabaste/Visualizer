@@ -1,3 +1,8 @@
+/// <summary>
+/// Controls highlighting of individual mesh faces by modifying vertex colors' alpha channel.
+/// Allows toggling highlight visibility per triangle on the attached MeshFilter's mesh.
+/// </summary>
+
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -12,10 +17,10 @@ namespace Visualizer.Interaction
         public float baseAlpha = 0f;
 
         private Mesh _mesh;
-        private HashSet<int> _selectedTriangles = new HashSet<int>();
+        private HashSet<int> _selectedTriangles = new HashSet<int>(); // Tracks currently highlighted triangles
 
-        private Color[] _colors;
-        private int[] _triangles;
+        private Color[] _colors; // Per-vertex colors of the mesh
+        private int[] _triangles; // Indices defining mesh triangles
 
         private void Awake()
         {
@@ -31,6 +36,9 @@ namespace Visualizer.Interaction
             }
         }
 
+        /// <summary>
+        /// Toggles the highlight state of the face specified by the triangle index.
+        /// </summary>
         public void ToggleFaceHighlight(int triangleIndex)
         {
             if (triangleIndex * 3 + 2 >= _triangles.Length)

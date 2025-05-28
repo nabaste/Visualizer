@@ -1,3 +1,10 @@
+/// <summary>
+/// CameraController handles input-based camera control for different views.
+/// Perspective view supports orbiting around a target, zooming, and panning.
+/// Orthographic views support zoom and 2D panning.
+/// It interacts with CameraInputManager to respond only when focused.
+/// </summary>
+
 using UnityEngine;
 
 namespace Visualizer.Camera
@@ -47,6 +54,9 @@ namespace Visualizer.Camera
             HandlePan();
         }
 
+        /// <summary>
+        /// Handles zoom using scroll wheel. Orthographic and perspective zoom are treated differently.
+        /// </summary>
         private void HandleZoom()
         {
             float scroll = Input.mouseScrollDelta.y;
@@ -66,6 +76,9 @@ namespace Visualizer.Camera
             }
         }
 
+        /// <summary>
+        /// Handles orbiting around a target using right mouse button.
+        /// </summary>
         private void HandleOrbit()
         {
             if (!Input.GetMouseButton(1)) return; // Right mouse
@@ -82,6 +95,9 @@ namespace Visualizer.Camera
             transform.LookAt(target);
         }
 
+        /// <summary>
+        /// Handles camera panning using the middle mouse button.
+        /// </summary>
         private void HandlePan()
         {
             if (!Input.GetMouseButton(2)) return; // Middle mouse
