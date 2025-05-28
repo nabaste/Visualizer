@@ -31,8 +31,7 @@ Shaded Wireframe View             |  Basic Lit Shaded
 Assets/Scripts/
 ├── Core/ # App entry point, viewport and mesh lifecycle management
 ├── IO/ # JSON parsing, mesh construction with vertex welding
-├── UI/ # Topbar buttons, dropdowns, and view label hooks
-├── Cameras/ # Input and control per camera, focus logic
+├── Camera/ # Input and control per camera, focus logic
 ├── Visualization/ # Shader management and slope mapping
 └── Interaction/ # Raycasting-based face selection and highlighting
 ```
